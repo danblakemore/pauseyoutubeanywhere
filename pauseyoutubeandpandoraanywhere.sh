@@ -27,12 +27,12 @@ while read tabId; do
     if ($(".pauseButton").is(":visible")) {
         // pause
        $(".pauseButton").click();
-        suchstupidrobustness = true;
+        thispandorabeingcontrolledbyscripts = true;
     } else {
         // play
-        if (suchstupidrobustness) {
+        if (thispandorabeingcontrolledbyscripts) {
             $(".playButton").click();
-            suchstupidrobustness = false;
+            thispandorabeingcontrolledbyscripts = false;
         }
     }
 })();
