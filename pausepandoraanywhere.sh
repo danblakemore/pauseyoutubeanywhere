@@ -6,12 +6,12 @@ while read tabId; do
     if ($(".pauseButton").is(":visible")) {
         // pause
        $(".pauseButton").click();
-        thispandorabeingcontrolledbyscripts = true;
+        window.thispandorabeingcontrolledbyscripts = true;
     } else {
         // play
-        if (thispandorabeingcontrolledbyscripts) {
+        if (window.thispandorabeingcontrolledbyscripts) {
             $(".playButton").click();
-            thispandorabeingcontrolledbyscripts = false;
+            window.thispandorabeingcontrolledbyscripts = false;
         }
     }
 })();

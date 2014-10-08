@@ -8,12 +8,12 @@ while read tabId; do
         // we should pause this video and save the fact that we did
         // pause
         video.pause();
-        drunkenslowmoguy = video.currentTime;
+        window.drunkenslowmoguy = video.currentTime;
     } else {
         // check if we paused this with js
-        if (drunkenslowmoguy === video.currentTime) {
+        if (window.drunkenslowmoguy === video.currentTime) {
             video.play();
-            drunkenslowmoguy = false;
+            window.drunkenslowmoguy = false;
         }
     }
 })();
