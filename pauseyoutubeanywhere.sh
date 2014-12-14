@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-chrome-cli list links | grep 'https://www\.youtube\.com/watch' | sed -E 's/^\[[0-9]+:([0-9]+)].*$/\1/' | \
+chrome-cli list links | grep 'https://www\.youtube\.com/watch' | sed -E 's/^\[([0-9]+:)?([0-9]+)].*$/\2/' | \
 while read tabId; do
     chrome-cli execute "$(cat <<'EOF'
 (function () {
