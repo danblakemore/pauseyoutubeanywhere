@@ -1,7 +1,12 @@
 #!/usr/bin/env zsh
-chrome-cli list links | grep '//www\.pandora\.com/' | sed -E 's/^\[([0-9]+:)?([0-9]+)].*$/\2/' | \
+if [ $# -ne 1 ]
+then
+    echo "provide a path"
+    exit 1
+fi
+"$1" list links | grep '//www\.pandora\.com/' | sed -E 's/^\[([0-9]+:)?([0-9]+)].*$/\2/' | \
 while read tabId; do
-    chrome-cli execute "$(cat <<'EOF'
+    "$1" execute '
 (function () {
     if ($(".pauseButton").is(":visible")) {
         // pause
@@ -14,6 +19,5 @@ while read tabId; do
             window.thispandorabeingcontrolledbyscripts = false;
         }
     }
-})();
-EOF)" -t $tabId
+})();' -t $tabId
 done

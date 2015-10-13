@@ -1,7 +1,12 @@
 #!/usr/bin/env zsh
-chrome-cli list links | grep 'bandcamp\.com/' | sed -E 's/^\[([0-9]+:)?([0-9]+)].*$/\2/' | \
+if [ $# -ne 1 ]
+then
+    echo "provide a path"
+    exit 1
+fi
+"$1" list links | grep 'bandcamp\.com/' | sed -E 's/^\[([0-9]+:)?([0-9]+)].*$/\2/' | \
 while read tabId; do
-    chrome-cli execute "$(cat <<'EOF'
+    "$1" execute '
 (function () {
     // only do this if there is already something playing, so we dont screw up playback that has yet to be started
     if ($(".playbutton").hasClass("playing")) {
@@ -9,6 +14,5 @@ while read tabId; do
         $(".nextbutton").click();
         window.thisbandcamppageisbeingcontrolledbyscripts = true;
     }
-})();
-EOF)" -t $tabId
+})();' -t $tabId
 done
