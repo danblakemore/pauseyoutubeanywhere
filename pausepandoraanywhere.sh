@@ -8,14 +8,18 @@ fi
 while read tabId; do
     "$1" execute '
 (function () {
-    if ($(".pauseButton").is(":visible")) {
+    var pauseButton = document.getElementsByClassName("pauseButton")[0];
+    var playButton = document.getElementsByClassName("playButton")[0];
+    // manually determine visibility because no jquery
+    // http://stackoverflow.com/a/14122186
+    if (pauseButton.offsetWidth !== 0 && pauseButton.offsetHeight !== 0) {
         // pause
-       $(".pauseButton").click();
+       pauseButton.click();
         window.thispandorabeingcontrolledbyscripts = true;
     } else {
         // play
         if (window.thispandorabeingcontrolledbyscripts) {
-            $(".playButton").click();
+            playButton.click();
             window.thispandorabeingcontrolledbyscripts = false;
         }
     }

@@ -9,9 +9,11 @@ while read tabId; do
     "$1" execute '
 (function () {
     // only skip if playing so we dont waste skips
-    if ($(".pauseButton").is(":visible")) {
+    var pauseButton = document.getElementsByClassName("pauseButton")[0];
+    var skipButton = document.getElementsByClassName("skipButton")[0];
+    if (pauseButton.offsetWidth !== 0 && pauseButton.offsetHeight !== 0) {
         // just take control of the tab (so play/pause will work too).
-        $(".skipButton").click();
+        skipButton.click();
         window.thispandorabeingcontrolledbyscripts = true;
     }
 })();' -t $tabId

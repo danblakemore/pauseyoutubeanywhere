@@ -8,14 +8,15 @@ fi
 while read tabId; do
     "$1" execute '
 (function () {
-    if ($(".playbutton").hasClass("playing")) {
+    var playButton = document.getElementsByClassName("playbutton")[0];
+    if (playButton.className.indexOf("playing") > -1) {
         // pause
-        $(".playbutton").click();
+        playButton.click();
         window.thisbandcamppageisbeingcontrolledbyscripts = true;
     } else {
         // play
         if (window.thisbandcamppageisbeingcontrolledbyscripts) {
-            $(".playbutton").click();
+            playButton.click();
             window.thisbandcamppageisbeingcontrolledbyscripts = false;
         }
     }

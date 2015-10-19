@@ -9,9 +9,11 @@ while read tabId; do
     "$1" execute '
 (function () {
     // only do this if there is already something playing, so we dont screw up playback that has yet to be started
-    if ($(".playbutton").hasClass("playing")) {
+    var playButton = document.getElementsByClassName("playbutton")[0];
+    var nextButton = document.getElementsByClassName("nextbutton")[0];
+    if (playButton.className.indexOf("playing") > -1) {
         // take control of the tab (so play/pause will work too).
-        $(".nextbutton").click();
+        nextButton.click();
         window.thisbandcamppageisbeingcontrolledbyscripts = true;
     }
 })();' -t $tabId
